@@ -1,0 +1,16 @@
+{
+  "name": "Vue3 Tetris",
+  "short_name": "Tetris",
+  "description": "Interactive Tetris game built with Vue 3 and TypeScript",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "/",
+  "theme_color": "#4FC08D",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
