@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite serve",
     "build": "vite build",
+    "build:cf": "BASE_URL=/ vite build",
+    "preview": "vite preview",
     "lint": "vite lint",
+    "deploy:cf": "yarn build:cf && wrangler pages deploy dist",
     "cz": "git-cz"
   },
   "dependencies": {
