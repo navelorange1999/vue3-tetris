@@ -43,6 +43,16 @@
     "@babel/helper-validator-identifier" "^7.18.6"
     to-fast-properties "^2.0.0"
 
+"@chankay/brand-assets@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@chankay/brand-assets/-/brand-assets-1.0.0.tgz#06798b5c19e43155ea660d9f99d79675f2174396"
+  integrity sha512-F9f+hqU5ZL73PuC8G54rk77ufeB2SAbU/kwBsVt7kegiUhOsdMogGE/LRj0Ws2wQUhnRTDKintKQgM196xEm4Q==
+
+"@chankay/site-shell@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@chankay/site-shell/-/site-shell-2.0.0.tgz#da41979f7a00252fa19a61c1f5b7b692070778c8"
+  integrity sha512-SYwAdVw4OCrOUMxSyThwePzpC/USnUeBHf4cMTI28Oxb/GmsL7aQFHTW7uZNzYS+UtabzHAX/lTiT1Gxvef9zw==
+
 "@commitlint/config-validator@^17.0.3":
   version "17.0.3"
   resolved "https://registry.yarnpkg.com/@commitlint/config-validator/-/config-validator-17.0.3.tgz#5d1ec17eece1f85a0d06c05d168a039b313eb5d7"

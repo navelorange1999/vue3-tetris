@@ -28,23 +28,23 @@ export default defineComponent({
 <style lang="less" scoped>
 .block {
   display: inline-block;
-  border: 2px solid #dcdfe6;
+  border: 2px solid var(--border);
   box-sizing: border-box;
   margin: "1px";
   &-active {
     display: inline-block;
-    border: 2px solid #409eff;
+    border: 2px solid var(--primary);
     box-sizing: border-box;
     &-container {
       width: 100%;
       height: 100%;
-      background: #409eff;
+      background: var(--primary);
     }
   }
   &-container {
     width: 100%;
     height: 100%;
-    background: #ebeef5;
+    background: var(--muted);
   }
 }
 </style>

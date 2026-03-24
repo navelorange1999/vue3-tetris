@@ -2,18 +2,19 @@
   <div class="menu-container">
     <div class="left">
       <el-button
+        class="play-button"
         size="medium"
         type="primary"
         circle
         plain
         :icon="state === 'start' ? 'el-icon-video-pause' : 'el-icon-video-play'"
-        style="transform: scale(2)"
         @click="keyEvents('Space')"
       />
     </div>
     <div class="right">
       <div class="up_btn">
         <el-button
+          class="pad-button"
           size="medium"
           icon="el-icon-caret-top"
           type="primary"
@@ -23,6 +24,7 @@
       </div>
       <div class="left_right_btns">
         <el-button
+          class="pad-button"
           size="medium"
           icon="el-icon-caret-left"
           type="primary"
@@ -30,6 +32,7 @@
           @click="keyEvents('ArrowLeft')"
         />
         <el-button
+          class="pad-button"
           size="medium"
           icon="el-icon-caret-right"
           type="primary"
@@ -39,6 +42,7 @@
       </div>
       <div class="down_btn">
         <el-button
+          class="pad-button"
           size="medium"
           icon="el-icon-caret-bottom"
           type="primary"
@@ -68,34 +72,60 @@ export default defineComponent({
 </script>
 <style lang="less" scoped>
 .menu-container {
-  border: 3px solid #67c23a;
-  border-top: none;
-  background: #e1f3d8;
-  display: flex;
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: repeat(3, max-content);
+  grid-template-rows: repeat(3, max-content);
+  grid-template-areas:
+    ". up ."
+    "left center right"
+    ". down .";
+  gap: 0.6rem;
+  align-items: center;
+  justify-items: center;
   justify-content: center;
-  flex-grow: 1;
+
   .left {
-    width: 50%;
+    grid-area: center;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
   .right {
-    padding-top: 2px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: contents;
 
-    .up_btn,
-    .left_right_btns,
+    .up_btn {
+      grid-area: up;
+    }
+
+    .left_right_btns {
+      display: contents;
+    }
+
+    .left_right_btns :deep(.el-button:first-child) {
+      grid-area: left;
+    }
+
+    .left_right_btns :deep(.el-button:last-child) {
+      grid-area: right;
+    }
+
     .down_btn {
-      width: 100%;
-      display: flex;
-      justify-content: space-evenly;
+      grid-area: down;
     }
   }
+}
+
+.play-button {
+  width: 4rem;
+  height: 4rem;
+}
+
+.pad-button {
+  width: 3rem;
+  height: 3rem;
 }
 </style>
