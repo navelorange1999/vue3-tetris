@@ -1,8 +1,11 @@
 import { createApp } from "vue";
-import "@chankay/site-shell/tokens.css";
 import { ElButton, ElMessage, ElRow } from "element-plus";
 import "element-plus/lib/theme-chalk/index.css";
 import App from "./App.vue";
+
+if (import.meta.env.MODE !== "demo") {
+  void import("@chankay/site-shell/tokens.css");
+}
 
 const app = createApp(App);
 app.component(ElButton.name, ElButton);

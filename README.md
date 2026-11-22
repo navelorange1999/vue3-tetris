@@ -8,7 +8,7 @@ A modern Tetris game implementation built with Vue 3 + TypeScript + Vite. Experi
 
 ## Demo
 
-https://tetris.chankay.com
+[Play Tetris](https://demos.chankay.com/tetris/)
 
 ## Features
 
@@ -50,12 +50,6 @@ Create a production build:
 yarn build
 ```
 
-Deploy to Cloudflare Pages:
-
-```bash
-yarn deploy:cf
-```
-
 ## Project Structure
 
 ```text
@@ -85,16 +79,12 @@ Vue 3's reactive API creates reactive game objects that automatically update the
 
 ## Deployment
 
-The project supports multiple deployment options:
-
-### GitHub Pages
-The project automatically deploys to GitHub Pages when pushing to the `main` branch via GitHub Actions.
-
-### Cloudflare Pages
-Configure your Cloudflare Pages project with:
-- Build command: `yarn build`
-- Build output directory: `dist`
-- Environment variable: `BASE_URL=/`
+GitHub Actions builds pull requests and publishes the `main` branch to the shared
+`chankay-demo-assets` R2 bucket through the protected `release` environment.
+Each release lives under `projects/tetris/releases/<commit>/`. The shared demo
+gateway reads the active release and fills the header and footer slots before
+returning HTML. The existing `build:cf` command remains available for the legacy
+Cloudflare host during cutover.
 
 ## Contributing
 
