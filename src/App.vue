@@ -1,6 +1,6 @@
 <template>
   <div class="page-shell">
-    <div ref="shellHeaderTarget"></div>
+    <div v-if="!usesGatewayShell" ref="shellHeaderTarget"></div>
     <main class="page-main">
       <div class="game-shell">
         <section class="board-column">
@@ -82,7 +82,7 @@
         </aside>
       </div>
     </main>
-    <div ref="shellFooterTarget"></div>
+    <div v-if="!usesGatewayShell" ref="shellFooterTarget"></div>
   </div>
 </template>
 
@@ -95,12 +95,13 @@ import {
   reactive,
   ref,
 } from "vue";
-import { mountSiteShell } from "@chankay/site-shell";
 import Cell from "./components/Cell.vue";
 import Scene from "./components/Scene.vue";
 import Menu from "./components/Menu.vue";
 import GameClass from "@/Model/Game";
 import EventClass from "@/Model/Event";
+
+const usesGatewayShell = import.meta.env.MODE === "demo";
 
 export default defineComponent({
   name: "App",
@@ -177,7 +178,8 @@ export default defineComponent({
       { key: "S / ↓", label: "Soft drop" },
     ];
 
-    const mountShellSections = () => {
+    const mountShellSections = async () => {
+      const { mountSiteShell } = await import("@chankay/site-shell");
       if (
         shellHeaderTarget.value &&
         shellHeaderTarget.value.childElementCount === 0
@@ -202,7 +204,9 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      mountShellSections();
+      if (!usesGatewayShell) {
+        void mountShellSections();
+      }
       window.addEventListener("keydown", keyEvents);
     });
 
@@ -220,6 +224,7 @@ export default defineComponent({
       shellFooterTarget,
       shellHeaderTarget,
       stateLabel,
+      usesGatewayShell,
     };
   },
 });
@@ -264,6 +269,20 @@ body {
   overflow: hidden;
   padding: 1rem;
   touch-action: none;
+}
+
+html.demo-gateway,
+.demo-gateway body {
+  overflow: visible;
+}
+
+.demo-gateway #app,
+.demo-gateway .page-shell {
+  min-height: 0;
+}
+
+.demo-gateway .page-main {
+  touch-action: pan-y;
 }
 
 .game-shell {
