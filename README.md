@@ -18,15 +18,14 @@ A modern Tetris game implementation built with Vue 3 + TypeScript + Vite. Experi
 - Next block preview
 - Game pause/resume functionality
 - Responsive design for various screen sizes
-- Level progression with increasing speed
 
 ## Controls
 
-- **Arrow Left/Right**: Move block horizontally
-- **Arrow Up**: Rotate block
-- **Arrow Down**: Soft drop (faster falling)
-- **Space**: Hard drop (instant drop)
-- **P**: Pause/Resume game
+- **← / A** and **→ / D**: Move left and right
+- **↑ / W**: Rotate
+- **↓ / S**: Soft drop
+- **Space**: Start, pause, or resume
+- **R**: Reset the board
 
 ## Tech Stack
 
@@ -37,17 +36,18 @@ A modern Tetris game implementation built with Vue 3 + TypeScript + Vite. Experi
 
 ## Local Development
 
-Install dependencies and start the dev server:
+Use Node.js 22 and Yarn 1.22.22 to install dependencies and start the dev server.
 
 ```bash
-yarn install
-yarn dev
+corepack yarn install --frozen-lockfile
+corepack yarn dev
 ```
 
-Create a production build:
+Build and preview the standalone app locally.
 
 ```bash
-yarn build
+corepack yarn build
+corepack yarn preview
 ```
 
 ## Project Structure
@@ -58,11 +58,10 @@ src/
 │   ├── Cell.vue          # Individual grid cell component
 │   ├── Menu.vue          # Game menu and controls
 │   └── Scene.vue         # Main game board
-├── core/
-│   ├── BlockClass.ts     # Block generation and control logic
-│   ├── GameClass.ts      # Game state management and rendering
-│   └── EventClass.ts     # Event handling and dispatching
-├── assets/               # Static assets
+├── Model/
+│   ├── Block.ts         # Block generation and control logic
+│   ├── Game.ts          # Game state management and rendering
+│   └── Event.ts         # Event handling and dispatching
 ├── App.vue              # Root component
 └── main.ts              # Application entry point
 ```
@@ -79,12 +78,16 @@ Vue 3's reactive API creates reactive game objects that automatically update the
 
 ## Deployment
 
-GitHub Actions builds pull requests and publishes the `main` branch to the shared
-`chankay-demo-assets` R2 bucket through the protected `release` environment.
-Each release lives under `projects/tetris/releases/<commit>/`. The shared demo
-gateway reads the active release and fills the header and footer slots before
-returning HTML. The existing `build:cf` command remains available for the legacy
-Cloudflare host during cutover.
+The [release workflow](.github/workflows/release.yml) builds pull requests and
+publishes `main` to the shared `chankay-demo-assets` R2 bucket. Each release lives
+under `projects/tetris/releases/<commit>/`. The shared demo gateway serves the
+active release and fills the header and footer slots.
+
+To build the release artifact locally, run this command from a Git checkout.
+
+```bash
+DEMO_RELEASE="$(git rev-parse HEAD)" bash scripts/build-demo.sh
+```
 
 ## Contributing
 

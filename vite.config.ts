@@ -3,10 +3,7 @@ import type { Plugin } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 
-import pkg from "./package.json";
-
 function gatewayTemplate(): Plugin {
-  const canonicalUrl = "https://demos.chankay.com/tetris/";
   return {
     name: "tetris-gateway-template",
     enforce: "pre",
@@ -25,7 +22,6 @@ function gatewayTemplate(): Plugin {
         return {
           html: html
             .replace('<html lang="en">', '<html lang="en" class="demo-gateway">')
-            .replaceAll("https://tetris.chankay.com/", canonicalUrl)
             .replace('content="index,follow"', 'content="noindex,nofollow"')
             .replace(/<script async src="https:\/\/pagead2\.googlesyndication\.com\/[^>]*><\/script>/, ""),
           tags: [
@@ -48,10 +44,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: gateway
       ? `/tetris/_r/${release}/`
-      : process.env.BASE_URL ||
-        (process.env.NODE_ENV === "production"
-          ? `https://${pkg.author}.github.io/${pkg.name}/`
-          : "/"),
+      : process.env.BASE_URL || "/",
     plugins: gateway ? [vue(), gatewayTemplate()] : [vue()],
     resolve: {
       alias: {
